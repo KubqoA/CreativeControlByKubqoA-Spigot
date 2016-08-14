@@ -137,8 +137,8 @@ public class Main extends JavaPlugin {
         protectionType = configHelper.protectionType;
         prefix = ChatColor.translateAlternateColorCodes('&', configHelper.prefix);
         int counter = 0;
-        for (int i = 0; i < prefix.length(); i++) {
-            if (prefix.charAt(i) == '§') {
+        for (int i = 0; i < configHelper.prefix.length(); i++) {
+            if (prefix.charAt(i) == '&') {
                 counter++;
             }
         }

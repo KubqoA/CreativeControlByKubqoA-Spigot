@@ -8,8 +8,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 /**
- * CreativeControl class
- * by KubqoA © 2015
+ * CreativeControlPaidByKubqoA class
+ * Created by jacobarbet on 2015.
  */
 public class DatabaseHelper {
     private Connection c;

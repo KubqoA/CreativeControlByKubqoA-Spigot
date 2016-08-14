@@ -14,6 +14,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
                 <configuration>
                     <source>1.6</source>
                     <target>1.6</target>
@@ -53,6 +54,15 @@
                     <finalName>CreativeControl</finalName>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.4</version>
+                <configuration>
+                    <reportOutputDirectory>./</reportOutputDirectory>
+                    <destDir>javadoc</destDir>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -67,27 +77,27 @@
         </repository>
         <repository>
             <id>residence-repo</id>
-            <url>file:///Users/jacobarbet/Desktop/Desktop Groups/Maven Dependencies/Residence.jar</url>
+            <url>file:///Users/jacobarbet/maven/Residence.jar</url>
         </repository>
         <repository>
             <id>multiverse-repo</id>
-            <url>file:///Users/jacobarbet/Desktop/Desktop Groups/Maven Dependencies/Multiverse-Core.jar</url>
+            <url>file:///Users/jacobarbet/maven/Multiverse-Core.jar</url>
         </repository>
         <repository>
             <id>towny-repo</id>
-            <url>file:///Users/jacobarbet/Desktop/Desktop Groups/Maven Dependencies/Towny.jar</url>
+            <url>file:///Users/jacobarbet/maven/Towny.jar</url>
         </repository>
         <repository>
             <id>factions-repo</id>
-            <url>file:///Users/jacobarbet/Desktop/Desktop Groups/Maven Dependencies/Factions.jar</url>
+            <url>file:///Users/jacobarbet/maven/Factions.jar</url>
         </repository>
         <repository>
             <id>massivecore-repo</id>
-            <url>file:///Users/jacobarbet/Desktop/Desktop Groups/Maven Dependencies/MassiveCore.jar</url>
+            <url>file:///Users/jacobarbet/maven/MassiveCore.jar</url>
         </repository>
         <repository>
             <id>griefprevention-repo</id>
-            <url>file:///Users/jacobarbet/Desktop/Desktop Groups/Maven Dependencies/GriefPrevention.jar</url>
+            <url>file:///Users/jacobarbet/maven/GriefPrevention.jar</url>
         </repository>
         <repository>
             <id>Plugin Metrics</id>
@@ -95,7 +105,7 @@
         </repository>
         <repository>
             <id>vault-repo</id>
-            <url>http://nexus.theyeticave.net/content/repositories/pub_releases</url>
+            <url>http://nexus.hc.to/content/repositories/pub_releases</url>
         </repository>
     </repositories>
     <!--Spigot-API-->
@@ -103,7 +113,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.9.2-R0.1-SNAPSHOT</version>
+            <version>1.10.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

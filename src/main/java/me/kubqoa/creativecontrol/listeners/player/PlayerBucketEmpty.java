@@ -21,11 +21,12 @@ class PlayerBucketEmpty implements Listener {
     @EventHandler
     public void onPlayerBucketEmpty(PlayerBucketEmptyEvent event) {
         Player player = event.getPlayer();
-        if (player.getGameMode()!= GameMode.CREATIVE || perm(player, "*") || perm(player, "bypass.*") || perm(player, "bypass.bucketplace")) return;
+        if (player.getGameMode() != GameMode.CREATIVE || perm(player, "*") || perm(player, "bypass.*") || perm(player, "bypass.bucketplace"))
+            return;
         Material material = event.getBucket();
         if (Main.noTracking.contains(material)) return;
         if (Main.items.contains(material)) {
-            Methods.send(player,"disabled-block");
+            Methods.send(player, "disabled-block");
             event.setCancelled(true);
             return;
         }
@@ -33,7 +34,7 @@ class PlayerBucketEmpty implements Listener {
         Methods.console(block.getLocation().toString());
         Methods.console(block.getType().name());
         BlockAPI blockAPI = new BlockAPI(block);
-        if(blockAPI.canBreak(player)) {
+        if (blockAPI.canBreak(player)) {
             blockAPI.addBlock(material);
         }
     }

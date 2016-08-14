@@ -6,9 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
 
-import static me.kubqoa.creativecontrol.helpers.Methods.exclude;
-import static me.kubqoa.creativecontrol.helpers.Methods.perm;
-import static me.kubqoa.creativecontrol.helpers.Methods.send;
+import static me.kubqoa.creativecontrol.helpers.Methods.*;
 
 /**
  * CreativeControlPaidByKubqoA class
@@ -18,8 +16,9 @@ public class PlayerArmorStandManipulate implements Listener {
     @EventHandler
     public void armorStand(PlayerArmorStandManipulateEvent event) {
         Player player = event.getPlayer();
-        if (exclude(player.getLocation()) || player.getGameMode()!= GameMode.CREATIVE || perm(player,"*") || perm(player,"allow.*") || perm(player,"allow.armorstand")) return;
+        if (exclude(player.getLocation()) || player.getGameMode() != GameMode.CREATIVE || perm(player, "*") || perm(player, "allow.*") || perm(player, "allow.armorstand"))
+            return;
         event.setCancelled(true);
-        send(player,"armor_stand");
+        send(player, "armor_stand");
     }
 }

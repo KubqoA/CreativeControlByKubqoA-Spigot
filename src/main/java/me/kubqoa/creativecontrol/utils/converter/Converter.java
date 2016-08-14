@@ -11,6 +11,7 @@ public class Converter {
     private final String from;
     private final String to;
     private final CommandSender sender;
+
     public Converter(String from, String to, CommandSender sender) {
         this.from = from;
         this.to = to;
@@ -20,9 +21,9 @@ public class Converter {
     public void start() {
         if (from.equalsIgnoreCase("oldcc")) {
             if (to.equalsIgnoreCase("current")) {
-                Methods.sendMsg(sender,"&cNow not supported. Sorry.");
+                Methods.sendMsg(sender, "&cNow not supported. Sorry.");
             } else {
-                Methods.sendMsg(sender,"&6oldcc &ccan only be used in combination with &6current&c.");
+                Methods.sendMsg(sender, "&6oldcc &ccan only be used in combination with &6current&c.");
             }
             return;
         }
@@ -31,17 +32,17 @@ public class Converter {
             if (to.equalsIgnoreCase("sqlite")) {
                 insideConvert.sqlite();
             } else {
-                Methods.sendMsg(sender,"&6mysql &ccan only be used in combination with &6sqlite&c.");
+                Methods.sendMsg(sender, "&6mysql &ccan only be used in combination with &6sqlite&c.");
             }
         } else if (from.equalsIgnoreCase("sqlite")) {
             if (to.equalsIgnoreCase("mysql")) {
                 insideConvert.mysql();
             } else {
-                Methods.sendMsg(sender,"&6sqlite &ccan only be used in combination with &6mysql&c.");
+                Methods.sendMsg(sender, "&6sqlite &ccan only be used in combination with &6mysql&c.");
             }
         } else {
-            Methods.sendMsg(sender,"&cIncorrect attribute &6from&c.");
-            Methods.sendMsg(sender,"&c<from> &6- From can be either &coldcc&6, &csqlite&6 or &cmysql");
+            Methods.sendMsg(sender, "&cIncorrect attribute &6from&c.");
+            Methods.sendMsg(sender, "&c<from> &6- From can be either &coldcc&6, &csqlite&6 or &cmysql");
         }
     }
 }

@@ -16,14 +16,10 @@ import org.bukkit.material.Rails;
 
 import java.util.List;
 
-/**
- * CreativeControl class
- * <p/>
- * by KubqoA © 2015
- */
 public class BlockAPI {
     private final Block block;
     private List<Material> above;
+
     public BlockAPI(Block b) {
         if (Main.serverVersion.equals("1.9")) {
             above = me.kubqoa.creativecontrol.utils.lists.list_1_9.above;
@@ -32,7 +28,7 @@ public class BlockAPI {
         } else if (Main.serverVersion.equals("1.7")) {
             above = me.kubqoa.creativecontrol.utils.lists.list_1_7.above;
         }
-        block=b;
+        block = b;
     }
 
     public void blocksAbove() {
@@ -132,20 +128,20 @@ public class BlockAPI {
         Location location = block.getLocation();
         if (Main.blocksLocation.contains(location)) {
             Material material = Main.blocksMaterial.get(location);
-            if (material==block.getType()) {
+            if (material == block.getType()) {
                 return true;
             } else if (material == Material.GRASS && block.getType() == Material.DIRT) {
                 return true;
-            } else if (material==Material.DIRT && block.getType() == Material.GRASS) {
+            } else if (material == Material.DIRT && block.getType() == Material.GRASS) {
                 return true;
             }
         } else if (Main.WblocksLocation.contains(location)) {
             Material material = Main.WblocksMaterial.get(location);
-            if (material==block.getType()) {
+            if (material == block.getType()) {
                 return true;
             } else if (material == Material.GRASS && block.getType() == Material.DIRT) {
                 return true;
-            } else if (material==Material.DIRT && block.getType() == Material.GRASS) {
+            } else if (material == Material.DIRT && block.getType() == Material.GRASS) {
                 return true;
             }
         } else if (BlockHelper.isCreativeBlock(location)) {
@@ -156,7 +152,7 @@ public class BlockAPI {
     }
 
     public boolean canBreak(Player player) {
-        return Integrations.canBreak(block,player);
+        return Integrations.canBreak(block, player);
     }
 
     public void removeBlock() {
@@ -172,7 +168,7 @@ public class BlockAPI {
         if (BlockHelper.isCreativeBlock(location)) {
             Main.RblocksLocation.add(location);
             Main.RblocksMaterial.put(location, location.getBlock().getType());
-            if (Main.RblocksLocation.size()>=Main.removingInterval) {
+            if (Main.RblocksLocation.size() >= Main.removingInterval) {
                 new BlocksFromDB().runTaskAsynchronously(Main.thisPlugin);
             }
         }
@@ -180,13 +176,13 @@ public class BlockAPI {
 
     public void addBlock(Material material) {
         Location location = block.getLocation();
-        if (Main.blocksLocation.size()<Main.blockCache) {
+        if (Main.blocksLocation.size() < Main.blockCache) {
             Main.blocksLocation.add(location);
             Main.blocksMaterial.put(location, material);
         }
         Main.WblocksLocation.add(location);
         Main.WblocksMaterial.put(location, material);
-        if (Main.WblocksLocation.size()>=Main.loggingInterval) {
+        if (Main.WblocksLocation.size() >= Main.loggingInterval) {
             new BlocksToDB().runTaskAsynchronously(Main.thisPlugin);
         }
     }

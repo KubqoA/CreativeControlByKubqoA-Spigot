@@ -2,22 +2,32 @@ package me.kubqoa.creativecontrol.listeners;
 
 import me.kubqoa.creativecontrol.Main;
 import me.kubqoa.creativecontrol.listeners.block.*;
-import me.kubqoa.creativecontrol.listeners.hanging.*;
-import me.kubqoa.creativecontrol.listeners.piston.*;
+import me.kubqoa.creativecontrol.listeners.hanging.HangingBreak;
+import me.kubqoa.creativecontrol.listeners.hanging.HangingBreakByEntity;
+import me.kubqoa.creativecontrol.listeners.hanging.HangingPlace;
+import me.kubqoa.creativecontrol.listeners.piston.PistonExtend;
+import me.kubqoa.creativecontrol.listeners.piston.PistonRetract;
+import me.kubqoa.creativecontrol.listeners.piston.PistonRetract_1_7;
 import me.kubqoa.creativecontrol.listeners.player.*;
-import me.kubqoa.creativecontrol.listeners.vehicle.*;
+import me.kubqoa.creativecontrol.listeners.vehicle.VehicleCreate;
+import me.kubqoa.creativecontrol.listeners.vehicle.VehicleCreate_1_9;
+import me.kubqoa.creativecontrol.listeners.vehicle.VehicleDestroy;
+import me.kubqoa.creativecontrol.listeners.vehicle.VehicleMove;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
  * CreativeControl class
- *
  * by KubqoA Â© 2015
  */
 public class Listeners {
     private final PluginManager pm;
     private final JavaPlugin pl;
-    public Listeners(PluginManager pluginManager, JavaPlugin plugin) { pm=pluginManager; pl=plugin; }
+
+    public Listeners(PluginManager pluginManager, JavaPlugin plugin) {
+        pm = pluginManager;
+        pl = plugin;
+    }
 
     public void init() {
         if (Main.enabledFeatures.contains("BlockBreak")) {
@@ -122,7 +132,6 @@ public class Listeners {
         }
 
         pm.registerEvents(new LeftClickListener(), pl);
-
 
 
         //EXPERIMENTAL -DEV ONLY

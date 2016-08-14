@@ -18,8 +18,10 @@ public class PlayerGamemodeChange implements Listener {
     @EventHandler
     public void gamemodeChange(PlayerGameModeChangeEvent event) {
         Player player = event.getPlayer();
-        if(perm(player,"bypass.gamemode.*") || perm(player,"bypass.*") || perm(player,"*")) { return; }
-        if (Main.disabledGamemodes.contains(event.getNewGameMode()) && !Methods.perm(player,"bypass.gamemode."+event.getNewGameMode().name())) {
+        if (perm(player, "bypass.gamemode.*") || perm(player, "bypass.*") || perm(player, "*")) {
+            return;
+        }
+        if (Main.disabledGamemodes.contains(event.getNewGameMode()) && !Methods.perm(player, "bypass.gamemode." + event.getNewGameMode().name())) {
             event.setCancelled(true);
         } else {
             new PlayerAPI(player).changeGM(event.getNewGameMode());

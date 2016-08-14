@@ -24,10 +24,11 @@ public class VehicleDestroy implements Listener {
             vehicleAPI.removeVehicle();
             if (event.getAttacker() instanceof Player) {
                 Player player = (Player) event.getAttacker();
-                if (player.getGameMode()!= GameMode.SURVIVAL || perm(player,"*") || perm(player,"bypass.*") || perm(player,"bypass.vehicles.*") || perm(player,"bypass.vehicles.break")) return;
+                if (player.getGameMode() != GameMode.SURVIVAL || perm(player, "*") || perm(player, "bypass.*") || perm(player, "bypass.vehicles.*") || perm(player, "bypass.vehicles.break"))
+                    return;
                 event.setCancelled(true);
                 vehicle.remove();
-                send(player,"vehicle-break");
+                send(player, "vehicle-break");
             }
         }
     }

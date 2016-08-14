@@ -35,7 +35,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Main extends JavaPlugin {
     /* VARIABLES */
 
-    public static Plugin factions,griefPrevention,residence,towny,vault,worldGuard; //supported plugins
+    public static Plugin factions, griefPrevention, residence, towny, vault, worldGuard; //supported plugins
     public static JavaPlugin thisPlugin; //This plugin
     public static PluginManager pm;
 
@@ -51,13 +51,13 @@ public class Main extends JavaPlugin {
     public static List<String> enabledFeatures = new ArrayList<String>(); //enabled features
 
     public static final List<Location> blocksLocation = new ArrayList<Location>();
-    public static final HashMap<Location,Material> blocksMaterial = new HashMap<Location, Material>();
+    public static final HashMap<Location, Material> blocksMaterial = new HashMap<Location, Material>();
 
     public static final List<Location> WblocksLocation = new ArrayList<Location>(); //to be written
-    public static final HashMap<Location,Material> WblocksMaterial = new HashMap<Location, Material>(); //to be written
+    public static final HashMap<Location, Material> WblocksMaterial = new HashMap<Location, Material>(); //to be written
 
     public static final List<Location> RblocksLocation = new ArrayList<Location>(); //to be removed
-    public static final HashMap<Location,Material> RblocksMaterial = new HashMap<Location, Material>(); //to be removed
+    public static final HashMap<Location, Material> RblocksMaterial = new HashMap<Location, Material>(); //to be removed
 
     public static final List<Location> hangingsLocation = new ArrayList<Location>();
 
@@ -71,16 +71,16 @@ public class Main extends JavaPlugin {
 
     public static final List<Location> RvehiclesLocation = new ArrayList<Location>(); //to be removed
 
-    public static final ConcurrentHashMap<Location,Location> UvehiclesLocation1 = new ConcurrentHashMap<Location, Location>(); //to be updated (struc. newLoc, oldLoc);
-    public static final ConcurrentHashMap<Location,Location> UvehiclesLocation2 = new ConcurrentHashMap<Location, Location>(); //to be updated (struc. oldLoc, newLoc);
+    public static final ConcurrentHashMap<Location, Location> UvehiclesLocation1 = new ConcurrentHashMap<Location, Location>(); //to be updated (struc. newLoc, oldLoc);
+    public static final ConcurrentHashMap<Location, Location> UvehiclesLocation2 = new ConcurrentHashMap<Location, Location>(); //to be updated (struc. oldLoc, newLoc);
 
-    public static final HashMap<String,String> cInventory = new HashMap<String, String>(); //Creative inv
-    public static final HashMap<String,String> sInventory = new HashMap<String, String>(); //Survival inv
-    public static final HashMap<String,String> aInventory = new HashMap<String, String>(); //Adventure inv
+    public static final HashMap<String, String> cInventory = new HashMap<String, String>(); //Creative inv
+    public static final HashMap<String, String> sInventory = new HashMap<String, String>(); //Survival inv
+    public static final HashMap<String, String> aInventory = new HashMap<String, String>(); //Adventure inv
 
-    public static final HashMap<String,String> wcInventory = new HashMap<String, String>(); //Creative inv (to be written)
-    public static final HashMap<String,String> wsInventory = new HashMap<String, String>(); //Survival inv (to be written)
-    public static final HashMap<String,String> waInventory = new HashMap<String, String>(); //Adventure inv (to be written)
+    public static final HashMap<String, String> wcInventory = new HashMap<String, String>(); //Creative inv (to be written)
+    public static final HashMap<String, String> wsInventory = new HashMap<String, String>(); //Survival inv (to be written)
+    public static final HashMap<String, String> waInventory = new HashMap<String, String>(); //Adventure inv (to be written)
 
     public static int loggingInterval = 0; //after how many blocks they should be logged to DB
     public static final int removingInterval = 50; //after how many blocks they should be removed from DB
@@ -111,22 +111,22 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         super.onEnable();
         Methods.console("&4[------------------[&cCreative Control&4]------------------]");
-        Methods.console("&6verison: &c"+this.getDescription().getVersion()+"&6 by &cKubqoA");
+        Methods.console("&6verison: &c" + this.getDescription().getVersion() + "&6 by &cKubqoA");
         Methods.console("&6If you have found some in-game &cbugs &6report them to the issue tracker.");
         Methods.console("&6Be sure to leave review on plugin page on SpigotMC.");
         Methods.console("");
         pm = super.getServer().getPluginManager();
-        folder = new File(getDataFolder().getParent()+"/CreativeControl");
+        folder = new File(getDataFolder().getParent() + "/CreativeControl");
         if (!folder.exists() && !folder.isDirectory()) { //PLUGIN DIRECTORY
             Methods.console("&6Plugin directory&c not found, creating one!");
-            if (!folder.mkdirs()){
+            if (!folder.mkdirs()) {
                 Methods.console("&cFailed to create plugin directory!");
             }
         }
 
         // VERSION DETERMINE
-        serverVersion=this.getServer().getBukkitVersion().split("-")[0];
-        serverVersion=serverVersion.substring(0,serverVersion.lastIndexOf("."));
+        serverVersion = this.getServer().getBukkitVersion().split("-")[0];
+        serverVersion = serverVersion.substring(0, serverVersion.lastIndexOf("."));
 
         // CONFIG
         ConfigHelper configHelper = new ConfigHelper(this);
@@ -136,15 +136,15 @@ public class Main extends JavaPlugin {
         players = configHelper.players;
         disable = configHelper.disable;
         protectionType = configHelper.protectionType;
-        prefix = ChatColor.translateAlternateColorCodes('&',configHelper.prefix);
+        prefix = ChatColor.translateAlternateColorCodes('&', configHelper.prefix);
         int counter = 0;
-        for( int i=0; i<prefix.length(); i++ ) {
-            if( prefix.charAt(i) == '§' ) {
+        for (int i = 0; i < prefix.length(); i++) {
+            if (prefix.charAt(i) == '§') {
                 counter++;
             }
         }
-        if (prefix.length()!=counter*2) {
-            prefix+=" ";
+        if (prefix.length() != counter * 2) {
+            prefix += " ";
         }
         dbprefix = configHelper.dbprefix;
         cooldown = configHelper.cooldown;
@@ -175,11 +175,11 @@ public class Main extends JavaPlugin {
         towny = pm.getPlugin("Towny");
         vault = pm.getPlugin("Vault");
         worldGuard = pm.getPlugin("WorldGuard");
-        thisPlugin= (JavaPlugin) pm.getPlugin("CreativeControlByKubqoA");
+        thisPlugin = (JavaPlugin) pm.getPlugin("CreativeControlByKubqoA");
 
-        if (factions!=null) {
+        if (factions != null) {
             Plugin massivecore = pm.getPlugin("MassiveCore");
-            if (massivecore!=null) {
+            if (massivecore != null) {
                 Methods.console("&cFound MassiveCore plugin! Implementing it!");
                 if (!massivecore.isEnabled()) {
                     Methods.console("&cMassiveCore not enabled! Enabling!");
@@ -206,7 +206,7 @@ public class Main extends JavaPlugin {
             }
         }
 
-        if (griefPrevention!=null) {
+        if (griefPrevention != null) {
             Methods.console("&cFound GriefPrevention plugin! Implementing it!");
             if (!griefPrevention.isEnabled()) {
                 Methods.console("&cGriefPrevention not enabled! Enabling!");
@@ -214,7 +214,7 @@ public class Main extends JavaPlugin {
             }
         }
 
-        if (residence!=null) {
+        if (residence != null) {
             Methods.console("&cFound Residence plugin! Implementing it!");
             if (!residence.isEnabled()) {
                 Methods.console("&cResidence not enabled! Enabling!");
@@ -222,7 +222,7 @@ public class Main extends JavaPlugin {
             }
         }
 
-        if (towny!=null) {
+        if (towny != null) {
             Methods.console("&cFound Towny plugin! Implementing it!");
             if (!towny.isEnabled()) {
                 Methods.console("&cTowny not enabled! Enabling!");
@@ -230,7 +230,7 @@ public class Main extends JavaPlugin {
             }
         }
 
-        if (vault!=null) {
+        if (vault != null) {
             Methods.console("&cFound Vault plugin! Implementing it!");
             if (!vault.isEnabled()) {
                 Methods.console("&cVault not enabled! Enabling!");
@@ -239,7 +239,7 @@ public class Main extends JavaPlugin {
             new Vault().setup();
         }
 
-        if (worldGuard!=null) {
+        if (worldGuard != null) {
             Methods.console("&cFound WorldGuard plugin! Implementing it!");
             if (!worldGuard.isEnabled()) {
                 Methods.console("&cWorldGuard not enabled! Enabling!");
@@ -252,7 +252,7 @@ public class Main extends JavaPlugin {
 
         // LISTENERS
         Methods.console("&cRegistering listeners!");
-        Listeners listeners = new Listeners(pm,this);
+        Listeners listeners = new Listeners(pm, this);
         listeners.init();
         Methods.console("&cDone!");
 
@@ -298,37 +298,37 @@ public class Main extends JavaPlugin {
     @Override
     public void onDisable() {
         super.onDisable();
-        if (WblocksLocation.size()>0) {
+        if (WblocksLocation.size() > 0) {
             new BlocksToDB().run();
         }
-        if (WvehiclesLocation.size()>0) {
+        if (WvehiclesLocation.size() > 0) {
             new VehiclesToDB().run();
         }
-        if (WhangingsLocation.size()>0) {
+        if (WhangingsLocation.size() > 0) {
             new HangingsToDB().run();
         }
-        if (RblocksLocation.size()>0) {
+        if (RblocksLocation.size() > 0) {
             new BlocksFromDB().run();
         }
-        if (RvehiclesLocation.size()>0) {
+        if (RvehiclesLocation.size() > 0) {
             new VehiclesFromDB().run();
         }
-        if (RhangingsLocation.size()>0) {
+        if (RhangingsLocation.size() > 0) {
             new HangingsFromDB().run();
         }
-        if (UvehiclesLocation1.size()>0) {
+        if (UvehiclesLocation1.size() > 0) {
             new VehiclesUpdateDB().run();
         }
-        if (wsInventory.size()>0 && waInventory.size()>0 && wcInventory.size()>0) {
+        if (wsInventory.size() > 0 && waInventory.size() > 0 && wcInventory.size() > 0) {
             new InventoriesToDB("all").run();
-        } else if (wsInventory.size()>0) {
+        } else if (wsInventory.size() > 0) {
             new InventoriesToDB("SURVIVAL").run();
-        } else if (wcInventory.size()>0) {
+        } else if (wcInventory.size() > 0) {
             new InventoriesToDB("CREATIVE").run();
-        } else if (waInventory.size()>0) {
+        } else if (waInventory.size() > 0) {
             new InventoriesToDB("ADVENTURE").run();
         }
-        disable.set("old-db-prefix",dbprefix);
+        disable.set("old-db-prefix", dbprefix);
         disable.saveConfig();
         try {
             c.close();

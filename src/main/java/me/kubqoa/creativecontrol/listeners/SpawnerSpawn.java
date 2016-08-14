@@ -10,7 +10,6 @@ import static me.kubqoa.creativecontrol.helpers.Methods.exclude;
 
 /**
  * CreativeControl class
- * <p/>
  * by KubqoA © 2015
  */
 class SpawnerSpawn implements Listener {

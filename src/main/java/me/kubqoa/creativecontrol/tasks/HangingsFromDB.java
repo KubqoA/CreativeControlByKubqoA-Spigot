@@ -13,19 +13,19 @@ public class HangingsFromDB extends BukkitRunnable {
     @Override
     public void run() {
         if (Main.dbtype) { //mysql
-            String sql = "DELETE FROM `"+Main.dbprefix+"hangings` WHERE (x,y,z,world) IN (";
+            String sql = "DELETE FROM `" + Main.dbprefix + "hangings` WHERE (x,y,z,world) IN (";
             for (Location location : Main.RhangingsLocation) {
-                sql+="("+location.getX()+","+location.getY()+","+location.getZ()+",'"+location.getWorld().getName()+"'),";
+                sql += "(" + location.getX() + "," + location.getY() + "," + location.getZ() + ",'" + location.getWorld().getName() + "'),";
             }
-            sql=sql.substring(0,sql.length()-1);
-            sql+=")";
+            sql = sql.substring(0, sql.length() - 1);
+            sql += ")";
             DatabaseHelper.updateSQL(sql);
         } else { //sqlite
-            String sql = "DELETE FROM `"+Main.dbprefix+"hangings` WHERE ";
+            String sql = "DELETE FROM `" + Main.dbprefix + "hangings` WHERE ";
             for (Location location : Main.RhangingsLocation) {
-                sql+="(x="+location.getX()+" AND y="+location.getY()+" AND z="+location.getZ()+" AND world='"+location.getWorld().getName()+"') OR ";
+                sql += "(x=" + location.getX() + " AND y=" + location.getY() + " AND z=" + location.getZ() + " AND world='" + location.getWorld().getName() + "') OR ";
             }
-            sql=sql.substring(0,sql.length()-4);
+            sql = sql.substring(0, sql.length() - 4);
             DatabaseHelper.updateSQL(sql);
         }
         Main.RhangingsLocation.clear();

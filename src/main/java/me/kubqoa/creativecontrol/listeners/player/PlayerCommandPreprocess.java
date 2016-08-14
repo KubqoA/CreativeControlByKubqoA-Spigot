@@ -21,10 +21,11 @@ public class PlayerCommandPreprocess implements Listener {
     public void command(PlayerCommandPreprocessEvent event) {
         Player player = event.getPlayer();
         String cmd = event.getMessage().split(" ")[0];
-        if (player.getGameMode()!= GameMode.CREATIVE || exclude(player.getLocation()) || perm(player,"cmd."+cmd) || perm(player,"cmd.*") || perm(player,"*")) return;
+        if (player.getGameMode() != GameMode.CREATIVE || exclude(player.getLocation()) || perm(player, "cmd." + cmd) || perm(player, "cmd.*") || perm(player, "*"))
+            return;
         if (Main.excludeCMD.contains(cmd)) {
             event.setCancelled(true);
-            Methods.sendMsg(player, ChatColor.translateAlternateColorCodes('&',Main.messages.getString("command").replaceAll("%cmd%",cmd)));
+            Methods.sendMsg(player, ChatColor.translateAlternateColorCodes('&', Main.messages.getString("command").replaceAll("%cmd%", cmd)));
         }
     }
 }

@@ -6,14 +6,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 
-/**
- * CreativeControl class
- * <p/>
- * by KubqoA © 2015
- */
 class WorldGuard {
     public static boolean worldGuard(Player player, Location loc, PluginManager pm) {
-        return getWorldGuard(pm).canBuild(player,loc);
+        return getWorldGuard(pm).canBuild(player, loc);
     }
 
     private static WorldGuardPlugin getWorldGuard(PluginManager pm) {

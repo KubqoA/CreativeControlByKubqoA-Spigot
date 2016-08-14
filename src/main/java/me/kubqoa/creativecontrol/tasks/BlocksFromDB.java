@@ -13,19 +13,19 @@ public class BlocksFromDB extends BukkitRunnable {
     @Override
     public void run() {
         if (Main.dbtype) { //mysql
-            String sql = "DELETE FROM `"+Main.dbprefix+"blocks` WHERE (x,y,z,world,material) IN (";
+            String sql = "DELETE FROM `" + Main.dbprefix + "blocks` WHERE (x,y,z,world,material) IN (";
             for (Location location : Main.RblocksLocation) {
-                sql+="("+location.getX()+","+location.getY()+","+location.getZ()+",'"+location.getWorld().getName()+"','"+Main.RblocksMaterial.get(location)+"'),";
+                sql += "(" + location.getX() + "," + location.getY() + "," + location.getZ() + ",'" + location.getWorld().getName() + "','" + Main.RblocksMaterial.get(location) + "'),";
             }
-            sql=sql.substring(0,sql.length()-1);
-            sql+=")";
+            sql = sql.substring(0, sql.length() - 1);
+            sql += ")";
             DatabaseHelper.updateSQL(sql);
         } else { //sqlite
-            String sql = "DELETE FROM `"+Main.dbprefix+"blocks` WHERE ";
+            String sql = "DELETE FROM `" + Main.dbprefix + "blocks` WHERE ";
             for (Location location : Main.RblocksLocation) {
-                sql+="(x="+location.getX()+" AND y="+location.getY()+" AND z="+location.getZ()+" AND world='"+location.getWorld().getName()+"' AND material='"+Main.RblocksMaterial.get(location)+"') OR ";
+                sql += "(x=" + location.getX() + " AND y=" + location.getY() + " AND z=" + location.getZ() + " AND world='" + location.getWorld().getName() + "' AND material='" + Main.RblocksMaterial.get(location) + "') OR ";
             }
-            sql=sql.substring(0,sql.length()-4);
+            sql = sql.substring(0, sql.length() - 4);
             DatabaseHelper.updateSQL(sql);
         }
         Main.RblocksLocation.clear();

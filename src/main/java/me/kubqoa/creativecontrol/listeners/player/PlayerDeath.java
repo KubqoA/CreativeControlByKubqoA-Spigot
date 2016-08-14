@@ -14,7 +14,7 @@ public class PlayerDeath implements Listener {
     @EventHandler
     public void death(PlayerDeathEvent event) {
         Player player = event.getEntity();
-        if (player.getGameMode()!= GameMode.CREATIVE) return;
+        if (player.getGameMode() != GameMode.CREATIVE) return;
         event.setKeepInventory(true);
     }
 }

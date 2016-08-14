@@ -18,10 +18,10 @@ public class PlayerQuit implements Listener {
     @EventHandler
     public void leave(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-        if (perm(player,"*") || perm(player,"bypass.*") || perm(player,"bypass.gamemode.*")) return;
+        if (perm(player, "*") || perm(player, "bypass.*") || perm(player, "bypass.gamemode.*")) return;
         GameMode gameMode = Main.thisPlugin.getServer().getDefaultGameMode();
-        if (player.getGameMode()!=gameMode) new PlayerAPI(player).logInv();
-        Main.players.set(player.getUniqueId().toString()+"-gamemode",player.getGameMode().name());
+        if (player.getGameMode() != gameMode) new PlayerAPI(player).logInv();
+        Main.players.set(player.getUniqueId().toString() + "-gamemode", player.getGameMode().name());
         Main.players.saveConfig();
     }
 }

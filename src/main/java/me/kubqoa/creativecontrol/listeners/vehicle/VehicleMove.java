@@ -18,6 +18,6 @@ public class VehicleMove implements Listener {
         Vehicle vehicle = event.getVehicle();
         if (exclude(vehicle.getLocation())) return;
         VehicleAPI vehicleAPI = new VehicleAPI(vehicle);
-        vehicleAPI.updateVehicle(event.getFrom(),event.getTo());
+        vehicleAPI.updateVehicle(event.getFrom(), event.getTo());
     }
 }

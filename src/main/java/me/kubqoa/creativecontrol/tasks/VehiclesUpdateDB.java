@@ -19,7 +19,7 @@ public class VehiclesUpdateDB extends BukkitRunnable {
         List<Location> locations1 = new ArrayList<Location>(Main.UvehiclesLocation2.keySet());
         for (Location location : locations1) {
             Methods.console(location.toString());
-            VehicleHelper.updateVehicle(location,Main.UvehiclesLocation2.get(location));
+            VehicleHelper.updateVehicle(location, Main.UvehiclesLocation2.get(location));
         }
     }
 }

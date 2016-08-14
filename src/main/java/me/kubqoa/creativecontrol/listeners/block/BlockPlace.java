@@ -23,20 +23,21 @@ public class BlockPlace implements Listener {
     @EventHandler
     public void blockPlaceEvent(BlockPlaceEvent event) {
         Player player = event.getPlayer();
-        if (player.getGameMode()!= GameMode.CREATIVE || perm(player, "*") || perm(player, "bypass.*") || perm(player, "bypass.place")) return;
+        if (player.getGameMode() != GameMode.CREATIVE || perm(player, "*") || perm(player, "bypass.*") || perm(player, "bypass.place"))
+            return;
         if (!event.canBuild()) return;
         Block block = event.getBlock();
         if (exclude(block.getLocation())) return;
         Material material = block.getType();
         if (Main.noTracking.contains(material)) return;
         if (Main.items.contains(material)) {
-            Methods.send(player,"disabled-block");
+            Methods.send(player, "disabled-block");
             event.setCancelled(true);
             return;
         }
-        if (material==Material.PUMPKIN ) {
+        if (material == Material.PUMPKIN) {
             CreatureSpawn.pumpkin.add(player);
-        } else if (material==Material.SKULL && block.getData()==(byte) 1) {
+        } else if (material == Material.SKULL && block.getData() == (byte) 1) {
             CreatureSpawn.wither.add(player);
         }
         BlockAPI blockAPI = new BlockAPI(block);

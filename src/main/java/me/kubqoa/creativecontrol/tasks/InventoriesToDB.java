@@ -10,6 +10,7 @@ import org.bukkit.scheduler.BukkitRunnable;
  */
 public class InventoriesToDB extends BukkitRunnable {
     private String gamemode;
+
     public InventoriesToDB(String gamemode) {
         this.gamemode = gamemode;
     }
@@ -17,7 +18,9 @@ public class InventoriesToDB extends BukkitRunnable {
     @Override
     public void run() {
         if (gamemode.equalsIgnoreCase("all")) {
-            survival(); creative(); adventure();
+            survival();
+            creative();
+            adventure();
         } else if (gamemode.equalsIgnoreCase("SURVIVAL")) {
             survival();
         } else if (gamemode.equalsIgnoreCase("CREATIVE")) {

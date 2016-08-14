@@ -19,7 +19,8 @@ public class HangingPlace implements Listener {
     @EventHandler
     public void placeEvent(HangingPlaceEvent event) {
         Player player = event.getPlayer();
-        if (exclude(player.getLocation()) || player.getGameMode()!= GameMode.CREATIVE || perm(player,"*") || perm(player,"bypass.*") || perm(player,"bypass.hanging.*") || perm(player,"bypass.hanging.place")) return;
+        if (exclude(player.getLocation()) || player.getGameMode() != GameMode.CREATIVE || perm(player, "*") || perm(player, "bypass.*") || perm(player, "bypass.hanging.*") || perm(player, "bypass.hanging.place"))
+            return;
         Location location = event.getEntity().getLocation();
         HangingAPI HangingAPI = new HangingAPI(location);
         HangingAPI.addHanging();

@@ -13,6 +13,6 @@ public class HangingHelper {
     }
 
     public static void removeHanging(Location location) {
-        DatabaseHelper.updateSQL("DELETE FROM `"+Main.dbprefix+"hangings` WHERE x="+location.getX()+" AND y="+location.getY()+" AND z="+location.getZ()+" AND world='"+location.getWorld().getName()+"'");
+        DatabaseHelper.updateSQL("DELETE FROM `" + Main.dbprefix + "hangings` WHERE x=" + location.getX() + " AND y=" + location.getY() + " AND z=" + location.getZ() + " AND world='" + location.getWorld().getName() + "'");
     }
 }

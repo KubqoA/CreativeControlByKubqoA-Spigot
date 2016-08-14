@@ -11,6 +11,7 @@ import java.util.List;
  */
 public class list_1_9 {
     public static final List<Material> willbreak = new ArrayList<Material>();
+
     static {
         willbreak.add(Material.SAPLING);
         willbreak.add(Material.WEB);
@@ -55,6 +56,7 @@ public class list_1_9 {
     }
 
     public static final List<Material> above = new ArrayList<Material>();
+
     static {
         above.add(Material.SAPLING);
         above.add(Material.YELLOW_FLOWER);
@@ -92,7 +94,9 @@ public class list_1_9 {
         above.add(Material.CHORUS_FLOWER);
         above.add(Material.CHORUS_PLANT);
     }
+
     public static final List<Material> list = new ArrayList<Material>();
+
     static {
         list.add(Material.SAPLING);
         list.add(Material.LEAVES);

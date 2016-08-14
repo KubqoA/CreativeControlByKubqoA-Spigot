@@ -14,8 +14,9 @@ import org.bukkit.entity.Vehicle;
  */
 public class VehicleAPI {
     private final Vehicle vehicle;
+
     public VehicleAPI(Vehicle vehicle) {
-        this.vehicle=vehicle;
+        this.vehicle = vehicle;
     }
 
     public boolean isCreativeVehicle() {
@@ -32,11 +33,11 @@ public class VehicleAPI {
 
     public void addVehicle() {
         Location location = vehicle.getLocation();
-        if (Main.vehiclesLocation.size()<Main.vehicleCache) {
+        if (Main.vehiclesLocation.size() < Main.vehicleCache) {
             Main.vehiclesLocation.add(location);
         }
         Main.WvehiclesLocation.add(location);
-        if (Main.WvehiclesLocation.size()>=Main.loggingInterval) {
+        if (Main.WvehiclesLocation.size() >= Main.loggingInterval) {
             new VehiclesUpdateDB().runTaskAsynchronously(Main.thisPlugin);
             new VehiclesToDB().runTaskAsynchronously(Main.thisPlugin);
         }
@@ -54,7 +55,7 @@ public class VehicleAPI {
             Main.RvehiclesLocation.add(location);
             Main.UvehiclesLocation2.remove(Main.UvehiclesLocation1.get(location));
             Main.UvehiclesLocation1.remove(location);
-            if (Main.RvehiclesLocation.size()>=Main.removingInterval) {
+            if (Main.RvehiclesLocation.size() >= Main.removingInterval) {
                 new VehiclesUpdateDB().runTaskAsynchronously(Main.thisPlugin);
                 new VehiclesFromDB().runTaskAsynchronously(Main.thisPlugin);
             }
@@ -74,15 +75,15 @@ public class VehicleAPI {
             Location original = Main.UvehiclesLocation1.get(oldLoc);
             if (Main.UvehiclesLocation2.containsKey(original)) {
                 Main.UvehiclesLocation2.remove(original);
-                Main.UvehiclesLocation2.put(original,newLoc);
+                Main.UvehiclesLocation2.put(original, newLoc);
             }
             Main.UvehiclesLocation1.remove(oldLoc);
-            Main.UvehiclesLocation1.put(newLoc,original);
+            Main.UvehiclesLocation1.put(newLoc, original);
         } else {
-            Main.UvehiclesLocation1.put(newLoc,oldLoc);
-            Main.UvehiclesLocation2.put(oldLoc,newLoc);
+            Main.UvehiclesLocation1.put(newLoc, oldLoc);
+            Main.UvehiclesLocation2.put(oldLoc, newLoc);
         }
-        if (Main.UvehiclesLocation1.size()>=Main.updateInterval) {
+        if (Main.UvehiclesLocation1.size() >= Main.updateInterval) {
             new VehiclesUpdateDB().runTaskAsynchronously(Main.thisPlugin);
         }
     }

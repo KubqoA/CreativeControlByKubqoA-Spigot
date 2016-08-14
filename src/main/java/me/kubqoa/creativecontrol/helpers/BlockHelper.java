@@ -9,8 +9,8 @@ import org.bukkit.Location;
  */
 public class BlockHelper {
     public static boolean isCreativeBlock(Location location) {
-        if(Main.RblocksLocation.contains(location)) {
-            if (Main.RblocksMaterial.get(location)==location.getBlock().getType()) {
+        if (Main.RblocksLocation.contains(location)) {
+            if (Main.RblocksMaterial.get(location) == location.getBlock().getType()) {
                 return false;
             }
         }
@@ -42,7 +42,7 @@ public class BlockHelper {
     }
 
     public static void removeBlock(Location location) {
-        DatabaseHelper.updateSQL("DELETE FROM `"+Main.dbprefix+"blocks` WHERE x="+location.getX()+" AND y="+location.getY()+" AND z="+location.getZ()+" AND world='"+location.getWorld().getName()+"'");
+        DatabaseHelper.updateSQL("DELETE FROM `" + Main.dbprefix + "blocks` WHERE x=" + location.getX() + " AND y=" + location.getY() + " AND z=" + location.getZ() + " AND world='" + location.getWorld().getName() + "'");
     }
 
     public static void updateBlock(Location oldLocation, Location newLocation) {

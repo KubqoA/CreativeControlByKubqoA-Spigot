@@ -1,14 +1,14 @@
 package me.kubqoa.creativecontrol.helpers;
 
-import java.io.File;
-import java.io.InputStream;
-import java.util.List;
-import java.util.Set;
-
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.File;
+import java.io.InputStream;
+import java.util.List;
+import java.util.Set;
 
 public class SimpleConfig {
     private int comments;
@@ -95,7 +95,7 @@ public class SimpleConfig {
     }
 
     public void set(String path, Object value, String comment) {
-        if(!this.config.contains(path)) {
+        if (!this.config.contains(path)) {
             this.config.set(manager.getPluginName() + "_COMMENT_" + comments, " " + comment);
             comments++;
         }
@@ -106,9 +106,9 @@ public class SimpleConfig {
 
     public void set(String path, Object value, String[] comment) {
 
-        for(String comm : comment) {
+        for (String comm : comment) {
 
-            if(!this.config.contains(path)) {
+            if (!this.config.contains(path)) {
                 this.config.set(manager.getPluginName() + "_COMMENT_" + comments, " " + comm);
                 comments++;
             }

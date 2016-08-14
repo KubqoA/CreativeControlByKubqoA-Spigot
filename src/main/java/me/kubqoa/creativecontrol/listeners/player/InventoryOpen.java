@@ -18,9 +18,10 @@ public class InventoryOpen implements Listener {
     public void inventoryOpen(InventoryOpenEvent event) {
         Player player = (Player) event.getPlayer();
         String name = event.getInventory().getName().replace("container.", "").replace("mob.", "").toLowerCase();
-        if (Main.messages.get("container-"+name)==null) return;
-        if (exclude(player.getLocation()) || player.getGameMode()!= GameMode.CREATIVE || perm(player,"*") || perm(player,"allow.*") || perm(player,"allow.container.*") || perm(player,"allow.container."+name)) return;
+        if (Main.messages.get("container-" + name) == null) return;
+        if (exclude(player.getLocation()) || player.getGameMode() != GameMode.CREATIVE || perm(player, "*") || perm(player, "allow.*") || perm(player, "allow.container.*") || perm(player, "allow.container." + name))
+            return;
         event.setCancelled(true);
-        send(player,"container-"+name);
+        send(player, "container-" + name);
     }
 }

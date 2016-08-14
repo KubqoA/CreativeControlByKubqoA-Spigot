@@ -8,14 +8,12 @@ import me.kubqoa.creativecontrol.tasks.HangingsToDB;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-/**
- * CreativeControl class
- *
- * by KubqoA © 2015
- */
 public class HangingAPI {
     private final Location loc;
-    public HangingAPI(Location location) {loc=location;}
+
+    public HangingAPI(Location location) {
+        loc = location;
+    }
 
     public boolean isCreativeHanging() {
         if (Main.hangingsLocation.contains(loc)) {
@@ -30,7 +28,7 @@ public class HangingAPI {
     }
 
     public boolean canBreak(Player player) {
-        return Integrations.canBreak(loc.getBlock(),player);
+        return Integrations.canBreak(loc.getBlock(), player);
     }
 
     public void removeHanging() {
@@ -42,18 +40,18 @@ public class HangingAPI {
         }
         if (HangingHelper.isCreativeHanging(loc)) {
             Main.RhangingsLocation.add(loc);
-            if (Main.RhangingsLocation.size()>=Main.removingInterval) {
+            if (Main.RhangingsLocation.size() >= Main.removingInterval) {
                 new HangingsFromDB().runTaskAsynchronously(Main.thisPlugin);
             }
         }
     }
 
     public void addHanging() {
-        if (Main.hangingsLocation.size()<Main.hangingCache) {
+        if (Main.hangingsLocation.size() < Main.hangingCache) {
             Main.hangingsLocation.add(loc);
         }
         Main.WhangingsLocation.add(loc);
-        if (Main.WhangingsLocation.size()>=Main.loggingInterval) {
+        if (Main.WhangingsLocation.size() >= Main.loggingInterval) {
             new HangingsToDB().runTaskAsynchronously(Main.thisPlugin);
         }
     }

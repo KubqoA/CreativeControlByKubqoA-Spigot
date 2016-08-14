@@ -18,13 +18,14 @@ import java.util.List;
  */
 public class PistonExtend implements Listener {
     private List<Material> list;
+
     public PistonExtend() {
-        if(Main.serverVersion.equals("1.9")) {
-            list=me.kubqoa.creativecontrol.utils.lists.list_1_9.list;
-        } else if(Main.serverVersion.equals("1.8")) {
-            list=me.kubqoa.creativecontrol.utils.lists.list_1_8.list;
-        } else if(Main.serverVersion.equals("1.7")) {
-            list=me.kubqoa.creativecontrol.utils.lists.list_1_7.list;
+        if (Main.serverVersion.equals("1.9")) {
+            list = me.kubqoa.creativecontrol.utils.lists.list_1_9.list;
+        } else if (Main.serverVersion.equals("1.8")) {
+            list = me.kubqoa.creativecontrol.utils.lists.list_1_8.list;
+        } else if (Main.serverVersion.equals("1.7")) {
+            list = me.kubqoa.creativecontrol.utils.lists.list_1_7.list;
         }
     }
 
@@ -41,7 +42,7 @@ public class PistonExtend implements Listener {
                             blockAPI.removeBlock();
                             block.setType(Material.AIR);
                         } else {
-                            blockAPI.updateBlock(location,new Location(location.getWorld(),location.getX(),location.getY(),location.getZ()+1));
+                            blockAPI.updateBlock(location, new Location(location.getWorld(), location.getX(), location.getY(), location.getZ() + 1));
                         }
                     }
                 }
@@ -55,7 +56,7 @@ public class PistonExtend implements Listener {
                             blockAPI.removeBlock();
                             block.setType(Material.AIR);
                         } else {
-                            blockAPI.updateBlock(location,new Location(location.getWorld(),location.getX(),location.getY(),location.getZ()-1));
+                            blockAPI.updateBlock(location, new Location(location.getWorld(), location.getX(), location.getY(), location.getZ() - 1));
                         }
                     }
                 }
@@ -69,7 +70,7 @@ public class PistonExtend implements Listener {
                             blockAPI.removeBlock();
                             block.setType(Material.AIR);
                         } else {
-                            blockAPI.updateBlock(location,new Location(location.getWorld(),location.getX()+1,location.getY(),location.getZ()));
+                            blockAPI.updateBlock(location, new Location(location.getWorld(), location.getX() + 1, location.getY(), location.getZ()));
                         }
                     }
                 }
@@ -83,7 +84,7 @@ public class PistonExtend implements Listener {
                             blockAPI.removeBlock();
                             block.setType(Material.AIR);
                         } else {
-                            blockAPI.updateBlock(location,new Location(location.getWorld(),location.getX()-1,location.getY(),location.getZ()));
+                            blockAPI.updateBlock(location, new Location(location.getWorld(), location.getX() - 1, location.getY(), location.getZ()));
                         }
                     }
                 }
@@ -97,7 +98,7 @@ public class PistonExtend implements Listener {
                             blockAPI.removeBlock();
                             block.setType(Material.AIR);
                         } else {
-                            blockAPI.updateBlock(location,new Location(location.getWorld(),location.getX(),location.getY()+1,location.getZ()));
+                            blockAPI.updateBlock(location, new Location(location.getWorld(), location.getX(), location.getY() + 1, location.getZ()));
                         }
                     }
                 }
@@ -111,7 +112,7 @@ public class PistonExtend implements Listener {
                             blockAPI.removeBlock();
                             block.setType(Material.AIR);
                         } else {
-                            blockAPI.updateBlock(location,new Location(location.getWorld(),location.getX(),location.getY()-1,location.getZ()));
+                            blockAPI.updateBlock(location, new Location(location.getWorld(), location.getX(), location.getY() - 1, location.getZ()));
                         }
                     }
                 }

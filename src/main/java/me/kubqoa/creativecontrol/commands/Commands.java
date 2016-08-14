@@ -11,8 +11,9 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class Commands {
     private final JavaPlugin plugin;
+
     public Commands(JavaPlugin plugin) {
-        this.plugin=plugin;
+        this.plugin = plugin;
     }
 
     public void init() {
@@ -24,9 +25,9 @@ public class Commands {
 
     public static void endLine(CommandSender sender) {
         if (sender == Main.thisPlugin.getServer().getConsoleSender()) {
-            Methods.sendMsg(sender,"&4[------------------------------------------------------]",false);
+            Methods.sendMsg(sender, "&4[------------------------------------------------------]", false);
         } else {
-            Methods.sendMsg(sender,"&4[---------------------------------------------------]",false);
+            Methods.sendMsg(sender, "&4[---------------------------------------------------]", false);
         }
     }
 }

@@ -4,11 +4,6 @@ import com.bekvon.bukkit.residence.protection.FlagPermissions;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-/**
- * CreativeControl class
- * <p/>
- * by KubqoA © 2015
- */
 class Residence {
     public static boolean residence(Player player, Location loc) {
         FlagPermissions permissions = com.bekvon.bukkit.residence.Residence.getPermsByLocForPlayer(loc, player);

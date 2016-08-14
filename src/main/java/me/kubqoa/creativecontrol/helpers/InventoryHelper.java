@@ -13,13 +13,13 @@ import java.io.ByteArrayOutputStream;
 
 /**
  * CreativeControl class
- * <p/>
  * by KubqoA © 2015
  */
 public class InventoryHelper {
     private final Player player;
+
     public InventoryHelper(Player p) {
-        player=p;
+        player = p;
     }
 
     public String encodeInventory() {
@@ -59,7 +59,7 @@ public class InventoryHelper {
 
             // Read the serialized inventory
             for (int i = 0; i < size; i++) {
-                itemStacks[i]=((ItemStack) dataInput.readObject());
+                itemStacks[i] = ((ItemStack) dataInput.readObject());
             }
             dataInput.close();
             return itemStacks;

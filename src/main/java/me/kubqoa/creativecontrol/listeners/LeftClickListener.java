@@ -25,21 +25,21 @@ class LeftClickListener implements Listener {
                 event.setCancelled(true);
                 BlockAPI blockAPI = new BlockAPI(block);
                 if (blockAPI.isCreativeBlock()) {
-                    Methods.sendMsg(player,"&4This block is already in database!");
+                    Methods.sendMsg(player, "&4This block is already in database!");
                     return;
                 }
                 blockAPI.addBlock(block.getType());
-                Methods.sendMsg(player,"&4Block added!");
+                Methods.sendMsg(player, "&4Block added!");
             } else if (Main.removeMode.contains(player)) {
                 Main.removeMode.remove(player);
                 event.setCancelled(true);
                 BlockAPI blockAPI = new BlockAPI(block);
                 if (!blockAPI.isCreativeBlock()) {
-                    Methods.sendMsg(player,"&4This block is not in database, so it couldn't have been deleted!");
+                    Methods.sendMsg(player, "&4This block is not in database, so it couldn't have been deleted!");
                     return;
                 }
                 blockAPI.removeBlock();
-                Methods.sendMsg(player,"&4Block removed!");
+                Methods.sendMsg(player, "&4Block removed!");
             }
         }
     }

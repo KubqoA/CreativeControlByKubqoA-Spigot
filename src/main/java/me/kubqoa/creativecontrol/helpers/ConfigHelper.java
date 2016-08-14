@@ -12,7 +12,6 @@ import java.util.List;
 
 /**
  * CreativeControl class
- * <p/>
  * by KubqoA © 2015
  */
 public class ConfigHelper {
@@ -30,19 +29,23 @@ public class ConfigHelper {
     public final List<Material> items = new ArrayList<Material>();
     public final List<Material> noTracking = new ArrayList<Material>();
     public final List<String> enabledFeatures = new ArrayList<String>();
-    public int blockCache = 0, vehicleCache=0, hangingCache=0;
-    public ConfigHelper(JavaPlugin javaPlugin) {folder= Main.folder; plugin=javaPlugin;}
+    public int blockCache = 0, vehicleCache = 0, hangingCache = 0;
+
+    public ConfigHelper(JavaPlugin javaPlugin) {
+        folder = Main.folder;
+        plugin = javaPlugin;
+    }
 
     public void start() {
         boolean exists;
         if (!folder.exists() || !folder.isDirectory()) {
-            if(!folder.mkdirs()) {
+            if (!folder.mkdirs()) {
                 Methods.console("&cFailed to create plugin directory!");
             }
         }
 
         SimpleConfigManager manager = new SimpleConfigManager(plugin);
-        exists = new File(folder+"/config.yml").exists();
+        exists = new File(folder + "/config.yml").exists();
         config = manager.getNewConfig("config.yml", new String[]{"CreativeControl", "by KubqoA"});
         if (exists) { //Execute check
             checkConfig();
@@ -50,7 +53,7 @@ public class ConfigHelper {
             Methods.console("&6config.yml&c not found, creating one!");
             createConfig();
         }
-        exists = new File(folder+"/messages.yml").exists();
+        exists = new File(folder + "/messages.yml").exists();
         messages = manager.getNewConfig("messages.yml", new String[]{"CreativeControl", "by KubqoA"});
         if (exists) { //Execute check
             oldMessages();
@@ -59,8 +62,8 @@ public class ConfigHelper {
             Methods.console("&6messages.yml&c not found, creating one!");
             createMessages();
         }
-        players = manager.getNewConfig("players.yml", new String[]{"CreativeControl", "by KubqoA","DO NOT MODIFY THIS FILE"});
-        disable = manager.getNewConfig("disable.yml", new String[]{"CreativeControl", "by KubqoA","DO NOT MODIFY THIS FILE"});
+        players = manager.getNewConfig("players.yml", new String[]{"CreativeControl", "by KubqoA", "DO NOT MODIFY THIS FILE"});
+        disable = manager.getNewConfig("disable.yml", new String[]{"CreativeControl", "by KubqoA", "DO NOT MODIFY THIS FILE"});
 
         cooldown = (long) config.getInt("message-cooldown");
         protectionType = config.getString("protection-type");
@@ -70,38 +73,38 @@ public class ConfigHelper {
         blockCache = config.getInt("block-memory-limit");
         vehicleCache = config.getInt("vehicle-memory-limit");
         hangingCache = config.getInt("hanging-memory-limit");
-        for (Object o:config.getList("disabled-gamemodes")) {
+        for (Object o : config.getList("disabled-gamemodes")) {
             disabledGamemodes.add(GameMode.valueOf(o.toString()));
         }
-        for (Object o:config.getList("disabled-worlds")) {
+        for (Object o : config.getList("disabled-worlds")) {
             exclude.add(o.toString());
         }
-        for (Object o:config.getList("disabled-commands")) {
+        for (Object o : config.getList("disabled-commands")) {
             excludeCMD.add(o.toString());
         }
-        for (Object o:config.getList("disabled-items")) {
+        for (Object o : config.getList("disabled-items")) {
             items.add(Material.getMaterial(o.toString()));
         }
-        for (Object o:config.getList("add-permissions")) {
+        for (Object o : config.getList("add-permissions")) {
             addperms.add(o.toString());
         }
-        for (Object o:config.getList("remove-permissions")) {
+        for (Object o : config.getList("remove-permissions")) {
             removeperms.add(o.toString());
         }
-        for (Object o:config.getList("excluded-blocks")) {
+        for (Object o : config.getList("excluded-blocks")) {
             noTracking.add(Material.valueOf(o.toString()));
         }
-        for (Object o:config.getList("enabled-features")) {
+        for (Object o : config.getList("enabled-features")) {
             enabledFeatures.add(o.toString());
         }
     }
 
     private void createConfig() {
-        config.set("disabled-commands", Arrays.asList("/command1", "/command2"), new String[]{"Put here all the commands you want to ","disable in creative! If you want to", "enable these commands for specific players", "give them permission cc.cmd./command_here","(e.g. cc.cmd./command1)"});
-        config.set("disabled-gamemodes", Arrays.asList("ADVENTURE", "SPECTATOR"), new String[]{"Here you can define which gamemodes you"," want to disable!","You can also create node disabled-gamemodes-worldname","and specify disabled gamemodes for each world."});
-        config.set("disabled-items", Arrays.asList("TNT", "BEDROCK"), new String[]{"Here you can put blocks or items which you"," want to disable in creative.","List of blocks you can disable can be", "found on this website", "https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html", "Please pay attention to put the values","correctly with uppercase letters."," otherwise this feature won't work", "and may cause errors!"});
-        config.set("disabled-worlds", Arrays.asList("world1", "world2"), new String[]{"Here you can define worlds in which should","be the functions of this plugin disabled!"});
-        config.set("disable-creative-spawners", true, new String[]{"Set to true if you want to prevent","creative placed spawners from spawning mobs."});
+        config.set("disabled-commands", Arrays.asList("/command1", "/command2"), new String[]{"Put here all the commands you want to ", "disable in creative! If you want to", "enable these commands for specific players", "give them permission cc.cmd./command_here", "(e.g. cc.cmd./command1)"});
+        config.set("disabled-gamemodes", Arrays.asList("ADVENTURE", "SPECTATOR"), new String[]{"Here you can define which gamemodes you", " want to disable!", "You can also create node disabled-gamemodes-worldname", "and specify disabled gamemodes for each world."});
+        config.set("disabled-items", Arrays.asList("TNT", "BEDROCK"), new String[]{"Here you can put blocks or items which you", " want to disable in creative.", "List of blocks you can disable can be", "found on this website", "https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html", "Please pay attention to put the values", "correctly with uppercase letters.", " otherwise this feature won't work", "and may cause errors!"});
+        config.set("disabled-worlds", Arrays.asList("world1", "world2"), new String[]{"Here you can define worlds in which should", "be the functions of this plugin disabled!"});
+        config.set("disable-creative-spawners", true, new String[]{"Set to true if you want to prevent", "creative placed spawners from spawning mobs."});
         config.set("remove-permissions", Arrays.asList("permissionnode1", "permission.node.2"), new String[]{"Here you can define which permissions will be", "taken when switched to creative mode. e.g. essentials.tpa"});
         config.set("add-permissions", Arrays.asList("permissionnode1", "permission.node.2"), new String[]{"Here you can define which permissions will be", "added when switched to creative mode. e.g. essentials.tpa"});
         config.set("db-type", "sqlite", new String[]{"Here you can set if you want to use", "sqlite DB or mysql DB"});
@@ -114,13 +117,13 @@ public class ConfigHelper {
         config.set("message-prefix", "&4[CC]&c", "Set message prefix here (supports colors)");
         config.set("inventory-switching", true, new String[]{"Set to true to enable inventory switching", "Set to false to disable it"});
         config.set("check-for-updates", true, new String[]{"Set to true to enable automatic update checking", "Set to false to disable it"});
-        config.set("message-cooldown", 2L, new String[]{"Here you can define time in seconds for","which will be all messages in cooldown","before sending them again to the player.","Set to 0 to disable."});
-        config.set("logging-interval", 10, new String[]{"Here you can define after how many creative", "placed blocks should they be written to","database. If this limit is not reached","they will be logged after 5 minutes."});
-        config.set("excluded-blocks", Arrays.asList("DIRT", "SAND"), new String[]{"Place here blocks you want to be","excluded from being tracked when", "placed in creative."});
-        config.set("block-memory-limit", 10000, new String[]{"Set how many blocks can be stored","in memory and the others will","be stored in database.","set to 0 to disable this memory","set to -1 to use only memory."});
-        config.set("vehicle-memory-limit", 10000, new String[]{"Set how many vehicles can be stored","in memory and the others will","be stored in database.","set to 0 to disable this memory","set to -1 to use only memory."});
-        config.set("hanging-memory-limit", 10000, new String[]{"Set how many hangings can be stored","in memory and the others will","be stored in database.","set to 0 to disable this memory","set to -1 to use only memory."});
-        config.set("enabled-features", Arrays.asList("BlockBreak", "BlockFall", "BlockPlace", "BlockExplode", "BedrockBreak", "HangingBreak", "HangingPlace", "VehicleCreate", "VehicleDestroy", "VehicleMove", "PlayerArmorStandManipulate", "PlayerCommandRestrict", "PlayerBannedItemFromInventory", "PlayerDamageEntity", "PlayerDeathNoDrop", "PlayerDropItem", "PlayerGamemodeChange", "PlayerJoin", "PlayerOpenRestrictedInventory", "PlayerPickupItem", "PlayerQuit","SpawnerSpawnEntity","CreatureSpawn","PistonExtend","PistonRetract"), new String[]{"Remove or comment out specific", "features to disable them."});
+        config.set("message-cooldown", 2L, new String[]{"Here you can define time in seconds for", "which will be all messages in cooldown", "before sending them again to the player.", "Set to 0 to disable."});
+        config.set("logging-interval", 10, new String[]{"Here you can define after how many creative", "placed blocks should they be written to", "database. If this limit is not reached", "they will be logged after 5 minutes."});
+        config.set("excluded-blocks", Arrays.asList("DIRT", "SAND"), new String[]{"Place here blocks you want to be", "excluded from being tracked when", "placed in creative."});
+        config.set("block-memory-limit", 10000, new String[]{"Set how many blocks can be stored", "in memory and the others will", "be stored in database.", "set to 0 to disable this memory", "set to -1 to use only memory."});
+        config.set("vehicle-memory-limit", 10000, new String[]{"Set how many vehicles can be stored", "in memory and the others will", "be stored in database.", "set to 0 to disable this memory", "set to -1 to use only memory."});
+        config.set("hanging-memory-limit", 10000, new String[]{"Set how many hangings can be stored", "in memory and the others will", "be stored in database.", "set to 0 to disable this memory", "set to -1 to use only memory."});
+        config.set("enabled-features", Arrays.asList("BlockBreak", "BlockFall", "BlockPlace", "BlockExplode", "BedrockBreak", "HangingBreak", "HangingPlace", "VehicleCreate", "VehicleDestroy", "VehicleMove", "PlayerArmorStandManipulate", "PlayerCommandRestrict", "PlayerBannedItemFromInventory", "PlayerDamageEntity", "PlayerDeathNoDrop", "PlayerDropItem", "PlayerGamemodeChange", "PlayerJoin", "PlayerOpenRestrictedInventory", "PlayerPickupItem", "PlayerQuit", "SpawnerSpawnEntity", "CreatureSpawn", "PistonExtend", "PistonRetract"), new String[]{"Remove or comment out specific", "features to disable them."});
         config.saveConfig();
     }
 
@@ -211,19 +214,19 @@ public class ConfigHelper {
 
     private void checkConfig() {
         if (config.getList("disabled-commands") == null) {
-            config.set("disabled-commands", Arrays.asList("/command1", "/command2"), new String[]{"Put here all the commands you want to ","disable in creative! If you want to", "enable these commands for specific players", "give them permission cc.cmd./command_here","(e.g. cc.cmd./command1)"});
+            config.set("disabled-commands", Arrays.asList("/command1", "/command2"), new String[]{"Put here all the commands you want to ", "disable in creative! If you want to", "enable these commands for specific players", "give them permission cc.cmd./command_here", "(e.g. cc.cmd./command1)"});
         }
         if (config.get("disabled-gamemodes") == null) {
-            config.set("disabled-gamemodes", Arrays.asList("ADVENTURE", "SPECTATOR"), new String[]{"Here you can define which gamemodes you"," want to disable!","You can also create node disabled-gamemodes-worldname","and specify disabled gamemodes for each world."});
+            config.set("disabled-gamemodes", Arrays.asList("ADVENTURE", "SPECTATOR"), new String[]{"Here you can define which gamemodes you", " want to disable!", "You can also create node disabled-gamemodes-worldname", "and specify disabled gamemodes for each world."});
         }
         if (config.getList("disabled-items") == null) {
-            config.set("disabled-items", Arrays.asList("TNT", "BEDROCK"), new String[]{"Here you can put blocks or items which you"," want to disable in creative.","List of blocks you can disable can be", "found on this website", "https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html", "Please pay attention to put the values","correctly with uppercase letters."," otherwise this feature won't work", "and may cause errors!"});
+            config.set("disabled-items", Arrays.asList("TNT", "BEDROCK"), new String[]{"Here you can put blocks or items which you", " want to disable in creative.", "List of blocks you can disable can be", "found on this website", "https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html", "Please pay attention to put the values", "correctly with uppercase letters.", " otherwise this feature won't work", "and may cause errors!"});
         }
         if (config.getList("disabled-worlds") == null) {
-            config.set("disabled-worlds", Arrays.asList("world1", "world2"), new String[]{"Here you can define worlds in which should","be the functions of this plugin disabled!"});
+            config.set("disabled-worlds", Arrays.asList("world1", "world2"), new String[]{"Here you can define worlds in which should", "be the functions of this plugin disabled!"});
         }
-        if (config.get("disable-creative-spawners")==null) {
-            config.set("disable-creative-spawners", true, new String[]{"Set to true if you want to prevent","creative placed spawners from spawning mobs."});
+        if (config.get("disable-creative-spawners") == null) {
+            config.set("disable-creative-spawners", true, new String[]{"Set to true if you want to prevent", "creative placed spawners from spawning mobs."});
         }
         if (config.getList("remove-permissions") == null) {
             config.set("remove-permissions", Arrays.asList("permissionnode1", "permission.node.2"), new String[]{"Here you can define which permissions will be", "taken when switched to creative mode. e.g. essentials.tpa"});
@@ -262,25 +265,26 @@ public class ConfigHelper {
             config.set("check-for-updates", true, new String[]{"Set to true to enable automatic update checking", "Set to false to disable it"});
         }
         if (config.get("logging-interval") == null) {
-            config.set("logging-interval", 10, new String[]{"Here you can define after how many creative", "placed blocks should they be written to database.","If this limit is not reached they","will be logged after 5 minutes."});
+            config.set("logging-interval", 10, new String[]{"Here you can define after how many creative", "placed blocks should they be written to database.", "If this limit is not reached they", "will be logged after 5 minutes."});
         }
         if (config.get("message-cooldown") == null) {
-            config.set("message-cooldown", 2L, new String[]{"Here you can define time in seconds for","which will be all messages in cooldown","before sending them again to the player."});
+            config.set("message-cooldown", 2L, new String[]{"Here you can define time in seconds for", "which will be all messages in cooldown", "before sending them again to the player."});
         }
         if (config.get("excluded-blocks") == null) {
             config.set("excluded-blocks", Arrays.asList("DIRT", "SAND"), new String[]{"Place here blocks you want to be", "excluded from being tracked when", "placed in creative."});
         }
         if (config.get("block-memory-limit") == null) {
-            config.set("block-memory-limit", 10000, new String[]{"Set how many blocks can be stored","in memory and the others will","be stored in database.","set to 0 to disable this memory","set to -1 to use only memory."});
+            config.set("block-memory-limit", 10000, new String[]{"Set how many blocks can be stored", "in memory and the others will", "be stored in database.", "set to 0 to disable this memory", "set to -1 to use only memory."});
         }
         if (config.get("vehicle-memory-limit") == null) {
-            config.set("vehicle-memory-limit", 10000, new String[]{"Set how many vehicles can be stored","in memory and the others will","be stored in database.","set to 0 to disable this memory","set to -1 to use only memory."});
+            config.set("vehicle-memory-limit", 10000, new String[]{"Set how many vehicles can be stored", "in memory and the others will", "be stored in database.", "set to 0 to disable this memory", "set to -1 to use only memory."});
         }
         if (config.get("hanging-memory-limit") == null) {
-            config.set("hanging-memory-limit", 10000, new String[]{"Set how many hangings can be stored","in memory and the others will","be stored in database.","set to 0 to disable this memory","set to -1 to use only memory."});
+            config.set("hanging-memory-limit", 10000, new String[]{"Set how many hangings can be stored", "in memory and the others will", "be stored in database.", "set to 0 to disable this memory", "set to -1 to use only memory."});
         }
         if (config.get("enabled-features") == null) {
-            config.set("enabled-features", Arrays.asList("BlockBreak", "BlockFall", "BlockPlace", "BlockExplode", "BedrockBreak", "HangingBreak", "HangingPlace", "VehicleCreate", "VehicleDestroy", "VehicleMove", "PlayerArmorStandManipulate", "PlayerCommandRestrict", "PlayerBannedItemFromInventory", "PlayerDamageEntity", "PlayerDeathNoDrop", "PlayerDropItem", "PlayerGamemodeChange", "PlayerJoin", "PlayerOpenRestrictedInventory", "PlayerPickupItem", "PlayerQuit","SpawnerSpawnEntity","CreatureSpawn","PistonExtend","PistonRetract"), new String[]{"Remove or comment out specific", "features to disable them."});        }
+            config.set("enabled-features", Arrays.asList("BlockBreak", "BlockFall", "BlockPlace", "BlockExplode", "BedrockBreak", "HangingBreak", "HangingPlace", "VehicleCreate", "VehicleDestroy", "VehicleMove", "PlayerArmorStandManipulate", "PlayerCommandRestrict", "PlayerBannedItemFromInventory", "PlayerDamageEntity", "PlayerDeathNoDrop", "PlayerDropItem", "PlayerGamemodeChange", "PlayerJoin", "PlayerOpenRestrictedInventory", "PlayerPickupItem", "PlayerQuit", "SpawnerSpawnEntity", "CreatureSpawn", "PistonExtend", "PistonRetract"), new String[]{"Remove or comment out specific", "features to disable them."});
+        }
         if (config.get("track-worldedit") != null) {
             config.removeKey("track-worldedit");
         }
@@ -532,64 +536,64 @@ public class ConfigHelper {
     }
 
     private void oldMessages() {
-        if (messages.get("blockbreak")!=null) {
-            messages.set("block-break",messages.get("blockbreak"));
+        if (messages.get("blockbreak") != null) {
+            messages.set("block-break", messages.get("blockbreak"));
             messages.removeKey("blockbreak");
         }
-        if (messages.get("minecart")!=null) {
-            messages.set("vehicle-break",messages.get("minecart"));
+        if (messages.get("minecart") != null) {
+            messages.set("vehicle-break", messages.get("minecart"));
             messages.removeKey("minecart");
         }
-        if (messages.get("itemframedestroy")!=null) {
-            messages.set("hanging-break",messages.get("itemframedestroy"));
+        if (messages.get("itemframedestroy") != null) {
+            messages.set("hanging-break", messages.get("itemframedestroy"));
             messages.removeKey("itemframedestroy");
         }
-        if (messages.get("bedrock")!=null) {
-            messages.set("block-break-bedrock",messages.get("bedrock"));
+        if (messages.get("bedrock") != null) {
+            messages.set("block-break-bedrock", messages.get("bedrock"));
             messages.removeKey("bedrock");
         }
-        if (messages.get("monsteregg")!=null) {
-            messages.set("monster_egg",messages.get("monsteregg"));
+        if (messages.get("monsteregg") != null) {
+            messages.set("monster_egg", messages.get("monsteregg"));
             messages.removeKey("monsteregg");
         }
-        if (messages.get("expbottle")!=null) {
-            messages.set("exp_bottle",messages.get("expbottle"));
+        if (messages.get("expbottle") != null) {
+            messages.set("exp_bottle", messages.get("expbottle"));
             messages.removeKey("expbottle");
         }
-        if (messages.get("chickenegg")!=null) {
-            messages.set("chicken_egg",messages.get("chickenegg"));
+        if (messages.get("chickenegg") != null) {
+            messages.set("chicken_egg", messages.get("chickenegg"));
             messages.removeKey("chickenegg");
         }
-        if (messages.get("itemframe")!=null) {
-            messages.set("item_frame",messages.get("itemframe"));
+        if (messages.get("itemframe") != null) {
+            messages.set("item_frame", messages.get("itemframe"));
             messages.removeKey("itemframe");
         }
-        if (messages.get("armorstand")!=null) {
-            messages.set("armor_stand",messages.get("armorstand"));
+        if (messages.get("armorstand") != null) {
+            messages.set("armor_stand", messages.get("armorstand"));
             messages.removeKey("armorstand");
         }
-        if (messages.get("disableditem")!=null) {
-            messages.set("disabled_item",messages.get("disableditem"));
+        if (messages.get("disableditem") != null) {
+            messages.set("disabled_item", messages.get("disableditem"));
             messages.removeKey("disableditem");
         }
-        if (messages.get("destroyfarmland")!=null) {
-            messages.set("destroy_farmland",messages.get("destroyfarmland"));
+        if (messages.get("destroyfarmland") != null) {
+            messages.set("destroy_farmland", messages.get("destroyfarmland"));
             messages.removeKey("destroyfarmland");
         }
-        if (messages.get("fillenderportal")!=null) {
-            messages.set("ender_portal",messages.get("fillenderportal"));
+        if (messages.get("fillenderportal") != null) {
+            messages.set("ender_portal", messages.get("fillenderportal"));
             messages.removeKey("fillenderportal");
         }
-        if (messages.get("eyeofender")!=null) {
-            messages.set("eye_of_ender",messages.get("eyeofender"));
+        if (messages.get("eyeofender") != null) {
+            messages.set("eye_of_ender", messages.get("eyeofender"));
             messages.removeKey("eyeofender");
         }
-        if (messages.get("enderpearl")!=null) {
-            messages.set("ender_pearl",messages.get("enderpearl"));
+        if (messages.get("enderpearl") != null) {
+            messages.set("ender_pearl", messages.get("enderpearl"));
             messages.removeKey("enderpearl");
         }
-        if (messages.get("cantplace")!=null) {
-            messages.set("disabled-block",messages.get("cantplace"));
+        if (messages.get("cantplace") != null) {
+            messages.set("disabled-block", messages.get("cantplace"));
             messages.removeKey("cantplace");
         }
         messages.saveConfig();

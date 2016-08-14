@@ -6,9 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerDropItemEvent;
 
-import static me.kubqoa.creativecontrol.helpers.Methods.exclude;
-import static me.kubqoa.creativecontrol.helpers.Methods.perm;
-import static me.kubqoa.creativecontrol.helpers.Methods.send;
+import static me.kubqoa.creativecontrol.helpers.Methods.*;
 
 /**
  * CreativeControlPaidByKubqoA class
@@ -18,8 +16,9 @@ public class PlayerDropItem implements Listener {
     @EventHandler
     public void drop(PlayerDropItemEvent event) {
         Player player = event.getPlayer();
-        if (exclude(player.getLocation()) || player.getGameMode()!= GameMode.CREATIVE || perm(player,"*") || perm(player,"allow.*") || perm(player,"allow.drop")) return;
+        if (exclude(player.getLocation()) || player.getGameMode() != GameMode.CREATIVE || perm(player, "*") || perm(player, "allow.*") || perm(player, "allow.drop"))
+            return;
         event.setCancelled(true);
-        send(player,"drop");
+        send(player, "drop");
     }
 }

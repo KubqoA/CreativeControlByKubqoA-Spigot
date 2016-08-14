@@ -22,10 +22,10 @@ class creativecontrolCMD implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (label.equalsIgnoreCase("ccontrol") || label.equalsIgnoreCase("creativecontrol")) {
-            if (args.length>0) {
-                if (args[0].equalsIgnoreCase("reload") && Methods.perm(sender,"cc.reload") && Methods.perm(sender,"cc.*") && Methods.perm(sender,"*")) {
-                    Methods.sendMsg(sender,"&4Getting new config.");
-                    Main.disable.set("old-db-prefix",Main.dbprefix);
+            if (args.length > 0) {
+                if (args[0].equalsIgnoreCase("reload") && Methods.perm(sender, "cc.reload") && Methods.perm(sender, "cc.*") && Methods.perm(sender, "*")) {
+                    Methods.sendMsg(sender, "&4Getting new config.");
+                    Main.disable.set("old-db-prefix", Main.dbprefix);
                     // CONFIG
                     ConfigHelper configHelper = new ConfigHelper(Main.thisPlugin);
                     configHelper.start();
@@ -34,7 +34,7 @@ class creativecontrolCMD implements CommandExecutor {
                     Main.players = configHelper.players;
                     Main.disable = configHelper.disable;
                     Main.protectionType = configHelper.protectionType;
-                    Main.prefix = ChatColor.translateAlternateColorCodes('&',configHelper.prefix)+" ";
+                    Main.prefix = ChatColor.translateAlternateColorCodes('&', configHelper.prefix) + " ";
                     Main.dbprefix = configHelper.dbprefix;
                     Main.cooldown = configHelper.cooldown;
                     Main.loggingInterval = configHelper.logwhen;
@@ -49,7 +49,7 @@ class creativecontrolCMD implements CommandExecutor {
                     Main.vehicleCache = configHelper.vehicleCache;
                     Main.hangingCache = configHelper.hangingCache;
                     if (Main.config.getString("db-type").equalsIgnoreCase("mysql")) Main.dbtype = true;
-                    Methods.sendMsg(sender,"&4Re-connecting to database server.");
+                    Methods.sendMsg(sender, "&4Re-connecting to database server.");
                     // DATABASE
                     try {
                         Main.c.close();
@@ -59,27 +59,27 @@ class creativecontrolCMD implements CommandExecutor {
                     DatabaseHelper databaseHelper = new DatabaseHelper();
                     databaseHelper.start();
                     databaseHelper.checkTables();
-                    Methods.sendMsg(sender,"&6Reloading finished! (&4v."+Main.thisPlugin.getDescription().getVersion()+"&6)");
-                } else if (args[0].equalsIgnoreCase("memory") && Methods.perm(sender,"cc.memory") && Methods.perm(sender,"cc.*") && Methods.perm(sender,"*")) {
-                    Methods.sendMsg(sender,"&cUsed memory &6/&a Total memory",false);
-                    Methods.sendMsg(sender,"&6Blocks memory: &c"+String.valueOf(Main.blocksLocation.size())+"&6 / &a"+Main.blockCache,false);
-                    Methods.sendMsg(sender,"&6Hangings memory: &c"+String.valueOf(Main.hangingsLocation.size())+"&6 / &a"+Main.hangingCache,false);
-                    Methods.sendMsg(sender,"&6Vehicles memory: &c"+String.valueOf(Main.vehiclesLocation.size())+"&6 / &a"+Main.vehicleCache,false);
-                } else if (args[0].equalsIgnoreCase("add") && Methods.perm(sender,"cc.add") && Methods.perm(sender,"cc.*") && Methods.perm(sender,"*")) {
+                    Methods.sendMsg(sender, "&6Reloading finished! (&4v." + Main.thisPlugin.getDescription().getVersion() + "&6)");
+                } else if (args[0].equalsIgnoreCase("memory") && Methods.perm(sender, "cc.memory") && Methods.perm(sender, "cc.*") && Methods.perm(sender, "*")) {
+                    Methods.sendMsg(sender, "&cUsed memory &6/&a Total memory", false);
+                    Methods.sendMsg(sender, "&6Blocks memory: &c" + String.valueOf(Main.blocksLocation.size()) + "&6 / &a" + Main.blockCache, false);
+                    Methods.sendMsg(sender, "&6Hangings memory: &c" + String.valueOf(Main.hangingsLocation.size()) + "&6 / &a" + Main.hangingCache, false);
+                    Methods.sendMsg(sender, "&6Vehicles memory: &c" + String.valueOf(Main.vehiclesLocation.size()) + "&6 / &a" + Main.vehicleCache, false);
+                } else if (args[0].equalsIgnoreCase("add") && Methods.perm(sender, "cc.add") && Methods.perm(sender, "cc.*") && Methods.perm(sender, "*")) {
                     if (sender instanceof ConsoleCommandSender) {
-                        Methods.sendMsg(sender,"&4Only in-game players can use this command!");
+                        Methods.sendMsg(sender, "&4Only in-game players can use this command!");
                         return true;
                     }
                     Player player = (Player) sender;
-                    Methods.sendMsg(sender,"&4Now please left click a block you wish to add to the database.");
+                    Methods.sendMsg(sender, "&4Now please left click a block you wish to add to the database.");
                     Main.addMode.add(player);
-                } else if (args[0].equalsIgnoreCase("remove") && Methods.perm(sender,"cc.remove") && Methods.perm(sender,"cc.*") && Methods.perm(sender,"*")) {
+                } else if (args[0].equalsIgnoreCase("remove") && Methods.perm(sender, "cc.remove") && Methods.perm(sender, "cc.*") && Methods.perm(sender, "*")) {
                     if (sender instanceof ConsoleCommandSender) {
-                        Methods.sendMsg(sender,"&4Only in-game players can use this command!");
+                        Methods.sendMsg(sender, "&4Only in-game players can use this command!");
                         return true;
                     }
                     Player player = (Player) sender;
-                    Methods.sendMsg(sender,"&4Now please left click a block you wish to remove from the database.");
+                    Methods.sendMsg(sender, "&4Now please left click a block you wish to remove from the database.");
                     Main.removeMode.add(player);
                 } else if (args[0].equalsIgnoreCase("update")) {
                     String latestVersion;
@@ -90,25 +90,25 @@ class creativecontrolCMD implements CommandExecutor {
                         latestVersion = updateChecker.getLatestVersion();
                         if (latestVersion != null) {
                             latestVersion = "v" + latestVersion;
-                            Methods.sendMsg(sender,"&cNew update found! Current version &6" + currentVersion + "&c latest version &6" + latestVersion + "&c! Download here:");
-                            Methods.sendMsg(sender,"&6https://www.spigotmc.org/resources/creativecontrol.9988/");
+                            Methods.sendMsg(sender, "&cNew update found! Current version &6" + currentVersion + "&c latest version &6" + latestVersion + "&c! Download here:");
+                            Methods.sendMsg(sender, "&6https://www.spigotmc.org/resources/creativecontrol.9988/");
                         } else {
-                            Methods.sendMsg(sender,"&cNo updates found!");
+                            Methods.sendMsg(sender, "&cNo updates found!");
                         }
                     } catch (Exception ex) {
-                        Methods.sendMsg(sender,"&cFailed to check for update!");
+                        Methods.sendMsg(sender, "&cFailed to check for update!");
                     }
                 } else if (args[0].equalsIgnoreCase("help")) {
                     sendHelp(sender);
                 }
             } else {
-                Methods.sendMsg(sender,"&4[------------------[&cCreative Control&4]------------------]",false);
-                Methods.sendMsg(sender,"",false);
-                Methods.sendMsg(sender,"&cThis server is running &6"+Main.thisPlugin.getDescription().getName()+" &cv: &6"+Main.thisPlugin.getDescription().getVersion(),false);
-                Methods.sendMsg(sender,"",false);
-                if (Methods.perm(sender,"cc.help") || Methods.perm(sender,"cc.*") || Methods.perm(sender,"*")) {
-                    Methods.sendMsg(sender,"&cTo view available commands do &6/ccontrol help&c.",false);
-                    Methods.sendMsg(sender,"",false);
+                Methods.sendMsg(sender, "&4[------------------[&cCreative Control&4]------------------]", false);
+                Methods.sendMsg(sender, "", false);
+                Methods.sendMsg(sender, "&cThis server is running &6" + Main.thisPlugin.getDescription().getName() + " &cv: &6" + Main.thisPlugin.getDescription().getVersion(), false);
+                Methods.sendMsg(sender, "", false);
+                if (Methods.perm(sender, "cc.help") || Methods.perm(sender, "cc.*") || Methods.perm(sender, "*")) {
+                    Methods.sendMsg(sender, "&cTo view available commands do &6/ccontrol help&c.", false);
+                    Methods.sendMsg(sender, "", false);
                 }
                 Commands.endLine(sender);
             }
@@ -118,18 +118,18 @@ class creativecontrolCMD implements CommandExecutor {
     }
 
     private void sendHelp(CommandSender sender) {
-        Methods.sendMsg(sender,"&4[------------------[&cCreative Control&4]------------------]",false);
-        Methods.sendMsg(sender,"",false);
-        Methods.sendMsg(sender,"&c/ccontrol reload &6- Reloads plugin's configuration.",false);
-        Methods.sendMsg(sender,"&c/ccontrol memory &6- Shows active memory usage for each cache.",false);
-        Methods.sendMsg(sender,"&c/ccontrol add &6- Adds clicked block to database.",false);
-        Methods.sendMsg(sender,"&c/ccontrol remove &6- Removes clicked block from database.",false);
-        Methods.sendMsg(sender,"&c/ccontrol update &6- Checks if update is available.",false);
-        Methods.sendMsg(sender,"&c/ccontrol help &6- Displays this help.",false);
-        Methods.sendMsg(sender,"&c/ccperms &6- Displays help for this subcommand.",false);
-        Methods.sendMsg(sender,"&c/cccmds &6- Displays help for this subcommand.",false);
-        Methods.sendMsg(sender,"&c/ccconvert &6- Displays help for this subcommand.",false);
-        Methods.sendMsg(sender,"",false);
+        Methods.sendMsg(sender, "&4[------------------[&cCreative Control&4]------------------]", false);
+        Methods.sendMsg(sender, "", false);
+        Methods.sendMsg(sender, "&c/ccontrol reload &6- Reloads plugin's configuration.", false);
+        Methods.sendMsg(sender, "&c/ccontrol memory &6- Shows active memory usage for each cache.", false);
+        Methods.sendMsg(sender, "&c/ccontrol add &6- Adds clicked block to database.", false);
+        Methods.sendMsg(sender, "&c/ccontrol remove &6- Removes clicked block from database.", false);
+        Methods.sendMsg(sender, "&c/ccontrol update &6- Checks if update is available.", false);
+        Methods.sendMsg(sender, "&c/ccontrol help &6- Displays this help.", false);
+        Methods.sendMsg(sender, "&c/ccperms &6- Displays help for this subcommand.", false);
+        Methods.sendMsg(sender, "&c/cccmds &6- Displays help for this subcommand.", false);
+        Methods.sendMsg(sender, "&c/ccconvert &6- Displays help for this subcommand.", false);
+        Methods.sendMsg(sender, "", false);
         Commands.endLine(sender);
     }
 }

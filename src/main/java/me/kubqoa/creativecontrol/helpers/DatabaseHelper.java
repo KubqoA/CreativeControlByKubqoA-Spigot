@@ -9,7 +9,6 @@ import java.sql.Statement;
 
 /**
  * CreativeControl class
- *
  * by KubqoA © 2015
  */
 public class DatabaseHelper {
@@ -17,7 +16,7 @@ public class DatabaseHelper {
     private final boolean dbtype;
 
     public DatabaseHelper() {
-        dbtype= Main.dbtype;
+        dbtype = Main.dbtype;
     }
 
     public void start() {
@@ -41,18 +40,18 @@ public class DatabaseHelper {
             Methods.console("&cError occurred while initializing database!");
             e.printStackTrace();
         }
-        Main.c=c;
+        Main.c = c;
         oldCC();
         String oldPrefix = Main.disable.getString("old-db-prefix");
         if (!Main.dbprefix.equals(oldPrefix)) {
-            changePrefix(oldPrefix,Main.dbprefix);
+            changePrefix(oldPrefix, Main.dbprefix);
         }
         Methods.console("&cSuccessful!");
 
     }
 
     public void checkTables() {
-        if(dbtype) { //mysql
+        if (dbtype) { //mysql
             if (selectSQL("SHOW TABLES LIKE '" + Main.dbprefix + "blocks'") == 0) { //blocks table
                 updateSQL("CREATE TABLE `" + Main.dbprefix + "blocks` ( `index` INT NOT NULL AUTO_INCREMENT , `x` REAL NOT NULL , `y` REAL NOT NULL , `z` REAL NOT NULL , `world` TEXT NOT NULL , `material` TEXT NOT NULL , PRIMARY KEY (`index`))");
             }
@@ -158,8 +157,8 @@ public class DatabaseHelper {
 
     private void editBlockTable() {
         if (dbtype) {
-            updateSQL("ALTER TABLE `"+Main.dbprefix+"blocks` DROP uuid");
-            updateSQL("ALTER TABLE `"+Main.dbprefix+"blocks` DROP timestamp");
+            updateSQL("ALTER TABLE `" + Main.dbprefix + "blocks` DROP uuid");
+            updateSQL("ALTER TABLE `" + Main.dbprefix + "blocks` DROP timestamp");
         }
     }
 }

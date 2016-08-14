@@ -18,6 +18,7 @@ import static me.kubqoa.creativecontrol.helpers.Methods.*;
  */
 public class PlayerInteractEntity_1_9 implements Listener {
     private final List<Material> animals = new ArrayList<Material>();
+
     {
         animals.add(Material.SEEDS);
         animals.add(Material.CARROT_ITEM);
@@ -30,15 +31,16 @@ public class PlayerInteractEntity_1_9 implements Listener {
     @EventHandler
     public void interact(PlayerInteractEntityEvent event) {
         Player player = event.getPlayer();
-        if (exclude(player.getLocation()) || player.getGameMode()!= GameMode.CREATIVE || perm(player, "*") || perm(player, "allow.*")) return;
+        if (exclude(player.getLocation()) || player.getGameMode() != GameMode.CREATIVE || perm(player, "*") || perm(player, "allow.*"))
+            return;
         Material material = player.getInventory().getItemInMainHand().getType();
         Entity entity = event.getRightClicked();
-        if (entity instanceof ItemFrame && !perm(player,"allow.itemframe")) {
+        if (entity instanceof ItemFrame && !perm(player, "allow.itemframe")) {
             event.setCancelled(true);
-            send(player,"item_frame");
-        } else if (entity instanceof org.bukkit.entity.minecart.StorageMinecart && !perm(player,"allow.container.minecart")) {
+            send(player, "item_frame");
+        } else if (entity instanceof org.bukkit.entity.minecart.StorageMinecart && !perm(player, "allow.container.minecart")) {
             event.setCancelled(true);
-            send(player,"container-minecart");
+            send(player, "container-minecart");
         } else if (entity instanceof Animals) {
             if (animals.contains(material) && !perm(player, "allow.breed")) {
                 event.setCancelled(true);
@@ -68,9 +70,9 @@ public class PlayerInteractEntity_1_9 implements Listener {
         } else if (material == Material.SNOW_BALL && !perm(player, "allow.snowball")) {
             event.setCancelled(true);
             send(player, "snowball");
-        } else if (material==Material.BOW && !perm(player,"allow.shooting")) {
+        } else if (material == Material.BOW && !perm(player, "allow.shooting")) {
             event.setCancelled(true);
-            send(player,"shooting");
+            send(player, "shooting");
         }
 
     }

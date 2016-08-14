@@ -5,6 +5,11 @@ import net.milkbowl.vault.permission.Permission;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
+/**
+ * CreativeControlPaidByKubqoA class
+ * Created by jacobarbet on 2015.
+ */
+
 public class Vault {
     private static Permission permission;
 

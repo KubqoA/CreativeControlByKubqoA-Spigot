@@ -12,8 +12,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 
 /**
- * CreativeControl class
- * by KubqoA © 2015
+ * CreativeControlPaidByKubqoA class
+ * Created by jacobarbet on 2015.
  */
 public class InventoryHelper {
     private final Player player;

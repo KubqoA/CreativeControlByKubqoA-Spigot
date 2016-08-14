@@ -9,8 +9,8 @@ import org.bukkit.event.entity.SpawnerSpawnEvent;
 import static me.kubqoa.creativecontrol.helpers.Methods.exclude;
 
 /**
- * CreativeControl class
- * by KubqoA © 2015
+ * CreativeControlPaidByKubqoA class
+ * Created by jacobarbet on 2015.
  */
 class SpawnerSpawn implements Listener {
     @EventHandler

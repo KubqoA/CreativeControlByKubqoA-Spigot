@@ -8,8 +8,8 @@ import java.net.URL;
 import java.util.regex.Pattern;
 
 /**
- * All rights reserved 2015
- * By jacobarbet
+ * CreativeControlPaidByKubqoA class
+ * Created by jacobarbet on 2015.
  */
 
 public class UpdateChecker {

@@ -10,8 +10,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 /**
- * CreativeControl class
- * by KubqoA © 2015
+ * CreativeControlPaidByKubqoA class
+ * Created by jacobarbet on 2015.
  */
 public class Methods {
     public static void console(String msg) {

@@ -5,8 +5,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 /**
- * CreativeControl class
- * by KubqoA © 2015
+ * CreativeControlPaidByKubqoA class
+ * Created by jacobarbet on 2015.
  */
 public class Cooldown extends BukkitRunnable {
     private final Player player;

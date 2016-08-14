@@ -28,9 +28,8 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * CreativeControl class
- *
- * by KubqoA © 2015
+ * CreativeControlPaidByKubqoA class
+ * Created by jacobarbet on 2015.
  */
 public class Main extends JavaPlugin {
     /* VARIABLES */

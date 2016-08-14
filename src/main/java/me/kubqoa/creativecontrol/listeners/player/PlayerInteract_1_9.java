@@ -15,8 +15,8 @@ import java.util.List;
 import static me.kubqoa.creativecontrol.helpers.Methods.*;
 
 /**
- * CreativeControl class
- * by KubqoA © 2015
+ * CreativeControlPaidByKubqoA class
+ * Created by jacobarbet on 2015.
  */
 public class PlayerInteract_1_9 implements Listener {
     private List<Material> seeds = new ArrayList<Material>();

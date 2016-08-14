@@ -17,8 +17,8 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
- * CreativeControl class
- * by KubqoA Â© 2015
+ * CreativeControlPaidByKubqoA class
+ * Created by jacobarbet on 2015.
  */
 public class Listeners {
     private final PluginManager pm;

@@ -11,9 +11,10 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * CreativeControl class
- * by KubqoA © 2015
+ * CreativeControlPaidByKubqoA class
+ * Created by jacobarbet on 2015.
  */
+
 public class ConfigHelper {
     private final JavaPlugin plugin;
     private final File folder;

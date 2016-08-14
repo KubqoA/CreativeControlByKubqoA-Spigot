@@ -16,6 +16,11 @@ import org.bukkit.material.Rails;
 
 import java.util.List;
 
+/**
+ * CreativeControlPaidByKubqoA class
+ * Created by jacobarbet on 2015.
+ */
+
 public class BlockAPI {
     private final Block block;
     private List<Material> above;

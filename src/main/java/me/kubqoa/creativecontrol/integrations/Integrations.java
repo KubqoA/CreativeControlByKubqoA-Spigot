@@ -4,6 +4,11 @@ import me.kubqoa.creativecontrol.Main;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
+/**
+ * CreativeControlPaidByKubqoA class
+ * Created by jacobarbet on 2015.
+ */
+
 public class Integrations {
     public static boolean canBreak(Block block, Player player) { //protection plugins integrations
         boolean can = true;

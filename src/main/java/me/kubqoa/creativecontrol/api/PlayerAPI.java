@@ -12,6 +12,11 @@ import java.util.List;
 
 import static me.kubqoa.creativecontrol.helpers.Methods.perm;
 
+/**
+ * CreativeControlPaidByKubqoA class
+ * Created by jacobarbet on 2015.
+ */
+
 public class PlayerAPI {
     private final Player player;
 

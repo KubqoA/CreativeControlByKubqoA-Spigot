@@ -8,6 +8,11 @@ import me.kubqoa.creativecontrol.tasks.HangingsToDB;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
+/**
+ * CreativeControlPaidByKubqoA class
+ * Created by jacobarbet on 2015.
+ */
+
 public class HangingAPI {
     private final Location loc;
 

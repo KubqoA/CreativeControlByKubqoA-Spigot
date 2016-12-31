@@ -1,0 +1,6 @@
+name: CreativeControlByKubqoA
+version: 2.4-EXPERIMENTAL
+author: KubqoA
+main: me.kubqoa.ccbk.CreativeControl
+depend: [ProtocolLib]
+softdepend: [WorldGuard, Residence, Towny, Factions, GriefPrevention, Vault, Multiverse-Core]
